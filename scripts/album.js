@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumQuestel = {
+    title: 'Life',
+    artist: 'Angela Questel',
+    label: 'Q Music',
+    year: '2016',
+    albumArtUrl: 'assests/images/album_covers/02.png',
+    songs: [
+        {title: 'These', duration: '1:01'},
+        {title: 'Are Values', duration: '5:01'},
+        {title: 'For Assignment', duration: '3:21'},
+        {title: 'Number', duration: '3:14'},
+        {title: '11', duration: '2:15'}
+    ]
+};
+
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">' +
@@ -38,22 +53,21 @@ var createSongRow = function (songNumber, songName, songLength) {
     
     return template;
 };
+    
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 var setCurrentAlbum = function (album) {
-    // #1
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-    // #2
+   
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
-    //#3
     albumSongList.innerHTML = '';
-    //#4
+  
     for (var i = 0; i < album.songs.length; i++){
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
@@ -61,4 +75,15 @@ var setCurrentAlbum = function (album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    
+    var albums = [albumPicasso, albumMarconi, albumQuestel];
+    var index = 1;
+    albumImage.addEventListener('click', function(event){
+        setCurrentAlbum(albums[index]); 
+        index++;
+        if(index == albums.length){
+            index = 0;
+            
+        }
+    });
 };
