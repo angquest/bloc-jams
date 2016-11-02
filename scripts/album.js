@@ -3,7 +3,7 @@ var albumPicasso = {
     artist: 'Pablo Picasso',
     label: 'Cubism',
     year: '1881',
-    albumArtUrl: 'assests/images/album_covers/01.png',
+    albumArtUrl: 'assets/images/album_covers/01.png',
     songs: [
         {title: 'I\'m so Blue', duration: '4:26'},
         {title: 'Green with Envy', duration: '3:14'},
@@ -18,7 +18,7 @@ var albumMarconi = {
     artist: 'Guglielmo Marconi',
     label: 'EM',
     year: '1909',
-    albumArtUrl: 'assests/images/album_covers/20.png',
+    albumArtUrl: 'assets/images/album_covers/20.png',
     songs: [
         {title: 'Hello, Operator?', duration: '1:01'},
         {title: 'Ring, ring, ring', duration: '5:01'},
@@ -31,7 +31,7 @@ var albumMarconi = {
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">' +
-            '<td class="song-item-number">' + songNumber + '</td>' +
+            '<td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>' +
             '<td class="song-item-title">' + songName + '</td>' +
             '<td class="song-item-duration">' + songLength + '</td>' +
         '</tr>';
@@ -40,25 +40,46 @@ var createSongRow = function (songNumber, songName, songLength) {
 };
 
 var setCurrentAlbum = function (album) {
-    // #1
+   
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-    // #2
+   
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
-    //#3
     albumSongList.innerHTML = '';
-    //#4
+ 
     for (var i = 0; i < album.songs.length; i++){
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
 };
 
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var songRows = document.getElementsByClassName('album-view-song-item');
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    
+    songListContainer.addEventListener('mouseover', function(event){
+        console.log(event.target); 
+        //only target indiviual song rows during event elegation
+        if(event.target.parentElement.className === 'album-view-song-item'){
+            //change the content from the number to the play buttin's HTML
+            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+        }
+    });
+    
+    for(var i = 0; i < songRows.length; i++){
+        songRows[i].addEventListener('mouseleave', function(event){
+           //revert the content back to the number
+            //selects first child wlwment, which is the song-item-number element
+            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+        });
+    }
 };
+
