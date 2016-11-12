@@ -5,11 +5,11 @@ var albumPicasso = {
     year: '1881',
     albumArtUrl: 'assets/images/album_covers/01.png',
     songs: [
-        {title: 'I\'m so Blue', duration: '4:26'},
-        {title: 'Green with Envy', duration: '3:14'},
-        {title: 'Lady in Red', duration: '5:01'},
-        {title: 'Pink Flamingo', duration: '3:21'},
-        {title: 'Magenta, the Pup', duration: '2:15'}
+        {title: 'I\'m so Blue', duration: '4:26', audioURL: 'assets/music/blue'},
+        {title: 'Green with Envy', duration: '3:14', audioURL: 'assets/music/green'},
+        {title: 'Lady in Red', duration: '5:01', audioURL: 'assets/music/red'},
+        {title: 'Pink Flamingo', duration: '3:21', audioURL: 'assets/music/pink'},
+        {title: 'Magenta, the Pup', duration: '2:15', audioURL: 'assets/music/magenta'}
     ]
 };
 
