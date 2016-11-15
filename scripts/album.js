@@ -5,7 +5,7 @@ var setSong = function(songNumber) {
     
     currentlyPlayingSongNumber =  parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber -1];
-    currentSoundFile = newbuzz.sound(currentSongFromAlbum.audioURL, {
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioURL, {
        formats: [ 'mp3' ],
        preload: true
     });
@@ -14,7 +14,7 @@ var setSong = function(songNumber) {
 
 var setVolume = function(volume) {
     if(currentSoundFile) {
-        currentSoundFile.setvolume(volume);
+        currentSoundFile.setVolume(volume);
     }
 }
 
@@ -53,7 +53,7 @@ var createSongRow = function (songNumber, songName, songLength) {
                $('.main-controls .play-pause').html(playerBarPauseButton);
                currentSoundFile.play();
            } else {
-               $(this).html(playerButtonTemplate);
+               $(this).html(playButtonTemplate);
                $('.main-control .play-pause').html(playerBarPlayButton);
                currentSoundFile.pause();
            }
