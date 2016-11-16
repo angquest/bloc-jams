@@ -178,6 +178,41 @@ var setupSeekBars = function() {
     });
 };
 
+//var setupSeekBars = function() { //controls seekBars
+//    var $seekBars = $('.player-bar .seek-bar'); //gets .player-bar (parent) .seek-bar (distant child) class
+//
+//    $seekBars.click(function(event) { //click event
+//        var offsetX = event.pageX - $(this).offset().left; //offsets the bar
+//        var barWidth = $(this).width();
+//        var seekBarFillRatio = offsetX / barWidth;
+//        if ($(this).parent().attr('class') == 'seek-control') { //seek-control is the song duration's seek-bar
+//            seek(seekBarFillRatio * currentSoundFile.getDuration());
+//        } else {
+//            setVolume(seekBarFillRatio * 100); //changes the volume
+//        }
+//        updateSeekPercentage($(this), seekBarFillRatio);
+//    });
+//
+//    $seekBars.find('.thumb').mousedown(function(event) { //mousedown event (hold mouse down); different from click: click is rapid press, mousedown is long press
+//        var $seekBar = $(this).parent(); //whichever bar it is choosing; if it is on volume, then thumb's parent is volume's seek bar, similar with song seek-bar
+//        $(document).bind('mousemove.thumb', function(event){ //moves mouse
+//            var offsetX = event.pageX - $seekBar.offset().left;
+//            var barWidth = $seekBar.width();
+//            var seekBarFillRatio = offsetX / barWidth;
+//            if ($seekBar.parent().attr('class') == 'seek-control') { //if it is song seek-bar, then do:
+//                seek(seekBarFillRatio * currentSoundFile.getDuration());
+//            } else { //otherwise, it has to be volume's seek-bar
+//                setVolume(seekBarFillRatio);
+//            }
+//            updateSeekPercentage($seekBar, seekBarFillRatio);
+//        });
+//        $(document).bind('mouseup.thumb', function() { //when mouseup event happens. This requires $(document).bind, because mouse can be anywhere in the document, but moving in attempt to move thumb class. We want to bind/lock this event so seek-bar's thumb will still move even when mouse is no longer on thumb.
+//            $(document).unbind('mousemove.thumb'); //unbinds mousemove
+//            $(document).unbind('mouseup.thumb'); //unbinds mouseup
+//        });
+//    });
+// };
+
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 }
