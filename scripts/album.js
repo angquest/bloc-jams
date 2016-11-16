@@ -178,6 +178,24 @@ var setupSeekBars = function() {
     });
 };
 
+
+//cp-21 assignment functions
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    
+    updateSeekBarWhileSongPlays(currentTime);
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    
+    updatePlayerBarSong(totalTime);
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    
+};
+//end of cp-21 assignment functions
+
+
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 }
